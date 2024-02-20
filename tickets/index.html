@@ -68,54 +68,7 @@ emailjs.init("jseE7rE0okZAKIQzz");
 //     const selectedOption = selectBox.options[selectedIndex].value;
 // }
 
-function ValidateForm(){
 
-  const  firstname = document.querySelector('#grid-first-name');
-    const lastname = document.querySelector('#grid-last-name');
-    const number = document.querySelector('#grid-number');
-    const email = document.querySelector('#grid-email');
-    const country = document.querySelector('#countries');
-    const city = document.querySelector('#grid-city');
-    const state = document.querySelector('#states');
-    const address = document.querySelector('#address');
-    const zip = document.querySelector('#grid-zip');
-    const shirt = document.querySelector('#shirt');
-
-
-    // const selectBox = document.querySelector('#select');
-    // const yes = document.querySelector('#select');
-    //const no = document.querySelector('#no');
-    // const selectedIndex = selectBox.selectedIndex;
-    // const selectedOption = selectBox.options[selectedIndex].value;
-
-
-function sendMail(params){
-    var tempParams ={
-     firstname :firstname.value,
-    lastname :lastname.value,
-    number : number.value,
-    email: email.value,
-    country: country.value,
-    city : city.value,
-    state : state.value,
-    address : address.value,
-    zip : zip.value,
-    shirt : shirt.value,
-    };
-        emailjs.send("service_8y7q5q4","template_bc4hzzt",tempParams)
-        .then(function(res){ 
-    
-                alert('Sign Up Successful', res.text);
-            console.log("sucess",res.status) ;
-            window.location.href = "/";  
-    
-        })
-        error => {
-            alert( 'An error occured, Plese try again',error.text)
-            }
-        }
-        return sendMail()
-} 
 </script>
 <style id='wp-emoji-styles-inline-css'>
 .form{
@@ -645,7 +598,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="nav-menu-primary-content relative flex flex-col items-start text-center gap-y-10 mx-auto pt-8 pb-12 h-full w-full w-screen-xl container justify-start overflow-y-scroll">
               <a href="index.html" target="_self" class="nav-bar-cta btn text-white w-full max-w-[480px]">
-        Buy Tickets
+        Apply Now
       </a>
         <div class="flex flex-col justify-start gap-y-3 text-left w-full">
             <nav class="nav-menu-primary self-start w-full">
@@ -924,14 +877,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 
-<section id="form" class="form">
-  <form class="w-full max-w-lg" method="post" onSubmit="ValidateForm()">
+<section id="form"  class="form">
+  <form class="w-full max-w-lg" method="post" id="myForm">
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
           First Name
         </label>
-        <input  class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
+        <input required  class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
         <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
       </div>
       <div class="w-full md:w-1/2 px-3">
@@ -948,13 +901,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-number">
           Phone Number
         </label>
-        <input  class="mb-3 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-number" type="phonenumber" placeholder="">
+        <input required class="mb-3 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-number" type="tel" placeholder="">
       </div>
       <div class="w-full px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
           Email
         </label>
-        <input  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="">
+        <input required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="">
         <!-- <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> -->
       </div>
     </div>
@@ -962,7 +915,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="countries">Select Country</label>
         <div class="relative">
-        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="countries" onchange="updateStates()">
+        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="countries" onchange="updateStates()" required>
           <option value="usa">USA</option>
           <option value="canada">Canada</option>
         </select>
@@ -1023,10 +976,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     </div>
    
-    <button type="button" onClick="return ValidateForm()" class="btn text-white max-w-[480px] mb-4">Submit</button>
+    <button type="submit" class="btn text-white max-w-[480px] mb-4"> Submit</button>
   </form>
 </section>
 
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Call your form validation function
+    if (ValidateForm()) {
+      // If validation passes, you can submit the form using AJAX or any other method
+      // For demonstration purposes, you can log a message
+      console.log("Form submitted successfully!");
+    } else {
+      // If validation fails, you can display an error message or take appropriate action
+      console.log("Form validation failed.");
+    }
+  });
+</script>
 <script>
   function updateStates() {
     // Get the selected country
@@ -1220,7 +1188,56 @@ gform.initializeOnLoaded( function() {gformInitSpinner( 1, '../wp-content/plugin
   
   </style>
     </div>
+<script>
+  function ValidateForm(){
 
+  const  firstname = document.querySelector('#grid-first-name');
+    const lastname = document.querySelector('#grid-last-name');
+    const number = document.querySelector('#grid-number');
+    const email = document.querySelector('#grid-email');
+    const country = document.querySelector('#countries');
+    const city = document.querySelector('#grid-city');
+    const state = document.querySelector('#states');
+    const address = document.querySelector('#address');
+    const zip = document.querySelector('#grid-zip');
+    const shirt = document.querySelector('#shirt');
+
+
+    // const selectBox = document.querySelector('#select');
+    // const yes = document.querySelector('#select');
+    //const no = document.querySelector('#no');
+    // const selectedIndex = selectBox.selectedIndex;
+    // const selectedOption = selectBox.options[selectedIndex].value;
+
+
+function sendMail(params){
+    var tempParams ={
+     firstname :firstname.value,
+    lastname :lastname.value,
+    number : number.value,
+    email: email.value,
+    country: country.value,
+    city : city.value,
+    state : state.value,
+    address : address.value,
+    zip : zip.value,
+    shirt : shirt.value,
+    };
+        emailjs.send("service_8y7q5q4","template_bc4hzzt",tempParams)
+        .then(function(res){ 
+    
+                alert('Sign Up Successful', res.text);
+            console.log("sucess",res.status) ;
+            window.location.href = "/";  
+    
+        })
+        error => {
+            alert( 'An error occured, Plese try again',error.text)
+            }
+        }
+        return sendMail()
+} 
+</script>
         <!-- TM Floodlight Tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=DC-11333715"></script> 
 <script src="../../js.adsrvr.org/up_loader.1.1.0.js"></script> 
