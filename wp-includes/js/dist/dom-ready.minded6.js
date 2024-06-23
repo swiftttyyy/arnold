@@ -4,7 +4,7 @@
 function changeTournamentDate() {
     var elements = document.getElementsByClassName("header-tournament-dates");
     for (var i = 0; i < elements.length; i++) {
-      elements[i].innerHTML = "Aug 20 - 26, 2024.";
+      elements[i].innerHTML = "Aug 21 - 26, 2024.";
     }
   }
   
